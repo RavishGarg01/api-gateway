@@ -1,0 +1,28 @@
+spring:
+  application:
+    name: api-gateway
+
+  cloud:
+    discovery:
+      enabled: true
+
+
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+
+      routes:
+        - id: lib-mng
+          uri: lb://LIB-MNG
+          predicates:
+              - Path=/lib/**
+          filters:
+            - RewritePath=/lib/(?<segment>.*), /${segment}
+            - AuthenticationFilter
+
+
+server:
+  port: 8083
+
