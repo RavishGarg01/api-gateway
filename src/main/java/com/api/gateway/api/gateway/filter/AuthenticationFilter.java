@@ -1,5 +1,6 @@
 package com.api.gateway.api.gateway.filter;
 
+import com.api.gateway.api.gateway.Exception.TokenExpireException;
 import com.api.gateway.api.gateway.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
@@ -28,10 +29,10 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Authentic
                   authHeader =authHeader.substring(7);
               }
               try {
-                  jwtUtil.exttractAllClaims(authHeader);
+                  jwtUtil.verifyTokenAndExttractAllClaims(authHeader);
               }catch (Exception e){
                   e.printStackTrace();
-                  throw new RuntimeException("Invalid Access");
+                  throw new TokenExpireException("Access Token expired");
               }
 
             }

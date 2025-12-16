@@ -42,11 +42,11 @@ public class JwtUtil {
     }
 
     private <T> T extractClaims(String token, Function<Claims,T> claimResolver){
-      final Claims claims = exttractAllClaims(token);
+      final Claims claims = verifyTokenAndExttractAllClaims(token);
       return claimResolver.apply(claims);
     }
 
-    public Claims exttractAllClaims(String token) {
+    public Claims verifyTokenAndExttractAllClaims(String token) {
         return Jwts.parser()
                 .verifyWith(getKey())
                 .build()
