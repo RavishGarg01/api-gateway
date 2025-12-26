@@ -1,8 +1,12 @@
 services:
   - type: web
     name: spring-boot-app
-    env: java
+    runtime: java
     plan: free
+
+    buildCommand: mvn clean package
+    startCommand: java -jar target/*.jar
+
     envVars:
       - key: JAVA_VERSION
         value: 8
