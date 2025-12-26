@@ -8,5 +8,5 @@ RUN gradle build -x test
 FROM eclipse-temurin:8-jdk-alpine
 WORKDIR /app
 COPY --from=build /app/build/libs/*.jar app.jar
-EXPOSE 8080
+EXPOSE 8083
 CMD ["java", "-jar", "app.jar"]
