@@ -1,5 +1,5 @@
-FROM openjdk:8-jdk-alpine
+FROM eclipse-temurin:8-jdk-alpine
 WORKDIR /app
 COPY target/*.jar app.jar
-EXPOSE 8083
+EXPOSE 8080
 CMD ["java", "-jar", "app.jar"]
